@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <script
+          src="https://code.jquery.com/jquery-3.6.0.min.js"
+          integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+          crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div>
+  <ul>
+    <li>
+      히히 댓글발사 no 1 <button>삭제</button>
+    </li>
+  </ul>
+
+</div>
+
+<script>
+
+  $(document).ready(function (){
+    let num = 1
+    $("li").on("click", (e)=>{
+      const target =e.target
+
+      let tmp =`<ul> <li> 히히 대댓글 발사 no ${++num} <button>삭제</button> </li> </ul>`
+
+      $(target).append(tmp)
+
+      $("li").on("click", "button",(e)=>{
+        const target =$(e.target).closest("li")
+
+        target.remove()
+      })
+
+    })
+
+
+  })
+
+</script>
+
+
+</body>
+</html>

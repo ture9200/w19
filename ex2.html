@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<script>
+    $(document).ready(function() {
+        const result = $('#result')
+        let count=0
+        //function안에 선언된 지역변수라 윈도우를 오염시키지 않음.
+        //이렇게 선언해서 쓰는게 안전함
+
+        //jquery는 이벤트 처리
+        //1. 동적인 요소에도 이벤트를 걸 수 있다.
+        //2. e는 순수한 이벤트 객체가 아니라 쌓여있다. -> original Event
+        //3. e.target으로 꺼낸 객체는 dom 객체 (jqery 객체 아님)
+
+        $("#btn").on("click", (e) => {
+            console.log(e)
+           // alert("click")
+            result.append(`<li>AAA ${count++}</li>`)
+        })
+
+        $("#result").on("click", "li", function(e) {
+            const target= e.target
+         $(e.target).remove() //객체 생성 제거 ...
+        })
+    })
+    //버튼이 클릭하고 (이벤트발생하면)  li를 추가하면 li클릭하면 li삭제한다. 동적이라 이벤트를 걸 수 없고
+    // 위에 변수 선언을 하지 않으면 .. 잘못 쓴 코드 버튼클릭할떄마다 result 얻기위해서 쓰는코드 엄청 느려지게 되고 성능이 떨어지게 되는 코드
+    // 가능하면 매번쓰지 마라 필요할때마다 재사용을 하는 방식으로 써라.
+
+</script>
+
+<button id="btn"> CLICK </button>
+
+<ul id="result">
+
+</ul>
+
+<button id="testBtn">Test</button>
+<script>
+    document.querySelector("#testBtn").addEventListener("click", function(e){
+        console.log(e)
+    }, false)
+</script>
+</body>
+</html>
+
+<!---document에  dom 이 끝나면 이거해줘  -> document. ready
+dom처리가 끝나면 h1태그
+
+이렇게 쓰면 윗쪽에선언하던 아래쪽에 선어한던 동작..
+안전하게 코딩하고 싶으면 document. ready 로 이벤트 거는 것
+두개정도가 좋고 여러개 나눠서 하는것 좋지 않음
+=== addEventListener로 동작
+
+onload 말고 document ready 를 쓰는데 onload가 좀더 느림...
+문자열로 selector 숫자로-->
+
+
